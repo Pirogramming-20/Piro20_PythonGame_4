@@ -5,7 +5,7 @@ def game2(players,start_idx):
     leader = players[start_idx].name
     number = 0
     if (start_idx == 0):
-        number = input(f"몇 층?! : ")
+        number = int(input(f"몇 층?! : "))
     else:
         number = random.randint(1, 20)
         print(f"몇 층?! : {number}")

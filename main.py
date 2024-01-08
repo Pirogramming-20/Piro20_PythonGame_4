@@ -17,7 +17,12 @@ ______         _    _                     _____
          __/ |                                                          
         |___/                                                           
 '''
-Game_Select_Menu = ""
+Game_Select_Menu = """
+            1. 더 게임 오브 데스
+            2. 아파트
+            3. 레코드 게임
+            4. 좋아 게임
+          """
 
 #게임 시작
 def Game_start():
@@ -81,11 +86,12 @@ def Game_SoulGame(players_list):
         #사람이면 
         if start_idx == 0:
             print(Game_Select_Menu)
-            game_number = int(input("게임 골라 :"))
+            game_number = int(input("게임 골라 : "))
         #컴퓨터면
         else:
+            print(Game_Select_Menu)
             game_number = random.randint(0,5) 
-        #미니 게임 진행!/
+            print(f"게임 골라 : {game_number}")    #미니 게임 진행!/
         try:
             if game_number == 1:
                 loser_idx = game1(players_list,start_idx)

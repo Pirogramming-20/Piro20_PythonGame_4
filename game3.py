@@ -7,7 +7,7 @@ user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 hdr = {'User-Agent': user_agent}
 
 Game_intro_str = (
-    "이이잉 레코드"
+    "레코드 레코드 잉잉잉~💿💿💿💿💿💿💿💿💿💿💿 레코드 레코드 잉잉잉~💿💿💿💿💿💿💿💿💿\n"
     "\033[1;31m주의! 이 게임은 파이썬 requests, BeautifulSoup이 깔려있어야 진행이 가능합니다\033[0m"
 )
 def game3_setting():
@@ -88,7 +88,7 @@ def game_setting_songs(list_songs_ForGame):
     
     num_answer = len(list_songs_ForGame)
     print("띄어쓰기와 영어이름를 감안해서",num_answer,"개의 제목이 있어요!")
-    print(list_songs_ForGame)
+    # print(list_songs_ForGame)
     return list_songs_ForGame
 
 def game3_ordering_players(players_list, start_idx):
