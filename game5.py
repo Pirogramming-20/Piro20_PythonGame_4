@@ -1,6 +1,7 @@
 import random
 
-def communist(players):
+#communist
+def game5(players,start_idx):
     print("공 산당! 공산당 공 산당!")
     cur_pointer = random.choice(players)
     prev_pointer = None

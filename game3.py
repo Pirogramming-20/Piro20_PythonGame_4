@@ -10,10 +10,7 @@ Game_intro_str = (
     "이이잉 레코드"
     "\033[1;31m주의! 이 게임은 파이썬 requests, BeautifulSoup이 깔려있어야 진행이 가능합니다\033[0m"
 )
-
-def game3(players_list,start_idx):
-    #인트로 출력
-    print(Game_intro_str)
+def game3_setting():
     theme_game = "" 
     #게임 시작 정보 설정
     while(1):
@@ -47,9 +44,9 @@ def game3(players_list,start_idx):
         except Exception as e:
             print(e)
         else:
-            break
+            return theme_game, num_songs, mod
     
-    print("곡 정보를 가져오고 있습니다...........")
+def game3_get_songs(theme_game, num_songs):
     #멜론에서 곡 가져오기 
     list_urls = []
     #request로 할랬는데 멜론이 자바스크립트로 페이지를 바꿔서 아무리 해도 안돼 => 페이지 바꿀 때 마다 추가적인 html 받음
@@ -61,16 +58,18 @@ def game3(players_list,start_idx):
     #url들에 접속해 source get
     for url_i in list_urls:
         response = requests.get(url_i, headers=hdr)
-        list_soups_for_songs.append(bs(response.text, "html.parser"))
+        list_soups_for_songs.append(bs(response.text, "html.parser"))#50개씩 저장된 페이지
     #리스트에 저장
-    list_songs_ForGame = [] #중복 처리를 위한 집합
+    list_songs_ForGame = []
+    #페이지 마다 받은 정보 리스트에 추가
     for soup_i in list_soups_for_songs:
         songs = soup_i.select(".fc_gray")
         for song in songs:
             song = song.get_text()
             list_songs_ForGame.append(song)
+    return list_songs_ForGame
     
-    #띄어쓰기와 영어이름를 감안
+def game_setting_songs(list_songs_ForGame):
     extra_answer = []
     for song in list_songs_ForGame:
         #띄어쓰기는 봐주자
@@ -90,7 +89,9 @@ def game3(players_list,start_idx):
     num_answer = len(list_songs_ForGame)
     print("띄어쓰기와 영어이름를 감안해서",num_answer,"개의 제목이 있어요!")
     print(list_songs_ForGame)
-    
+    return list_songs_ForGame
+
+def game3_ordering_players(players_list, start_idx):
     # 순서 정하기
     players_list_ordered = []
     #start_idx를 제외한 플레이어는 추가 후 리스트 셔플 
@@ -103,7 +104,23 @@ def game3(players_list,start_idx):
     print("순서는")
     for player in players_list:
         print(player.name)
+    return players_list_ordered
     
+    
+def game3(players_list,start_idx):
+    #인트로 출력
+    print(Game_intro_str)
+    
+    #게임 세팅
+    theme_game, num_songs, mod = game3_setting()
+
+    print("곡 정보를 가져오고 있습니다...........")
+    list_songs_ForGame = game3_get_songs(theme_game, num_songs)
+    #띄어쓰기와 영어이름를 감안
+    list_songs_ForGame = game_setting_songs(list_songs_ForGame)
+    
+    players_list_ordered = game3_ordering_players(players_list, start_idx)
+
     #게임진행
     while(True):    
         for player in players_list_ordered:

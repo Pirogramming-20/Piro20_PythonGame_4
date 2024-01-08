@@ -1,6 +1,7 @@
 import random
 
-def play_apartment_game(players):
+#play_apartment_game
+def game2(players,start_idx):
     leader = random.choice(players)
     print(f"술래: {leader}")
 

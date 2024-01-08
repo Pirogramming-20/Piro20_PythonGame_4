@@ -5,9 +5,18 @@ from game1 import game1
 from game2 import game2
 from game3 import game3
 from game4 import game4
-from game2 import game5
+from game5 import game5
 
-Game_start_Intro_Str = ""
+Game_start_Intro_Str = '''
+______         _    _                     _____                         
+| ___ \       | |  | |                   |  __ \                        
+| |_/ / _   _ | |_ | |__    ___   _ __   | |  \/  __ _  _ __ ___    ___ 
+|  __/ | | | || __|| '_ \  / _ \ | '_ \  | | __  / _` || '_ ` _ \  / _ 
+| |    | |_| || |_ | | | || (_) || | | | | |_\ \| (_| || | | | | ||  __/
+\_|     \__, | \__||_| |_| \___/ |_| |_|  \____/ \__,_||_| |_| |_| \___|
+         __/ |                                                          
+        |___/                                                           
+'''
 Game_Life_Select_Menu = ""
 
 #게임 시작

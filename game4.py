@@ -1,7 +1,7 @@
 import random
 
-#내가 시작해야하는거 아닌가 ? 진 사람이 게임 고르는게 아니라 랜덤으로 뽑혀서 게임 고르는거 아닌가
-def game4(players, start_index, name):
+def game4(players, start_index):
+    name = players[0]
     current_player = players[start_index]  # 시작 플레이어
     rejection_count = 0
     print("술도 마셨는데 좋아 게임할까~ ")
