@@ -39,6 +39,7 @@ def game1(members, start_index):
       next = targets[start_index]
       cnt = 1
       while cnt < number:
+          print(f"{cnt}: {members[next].name}")
           cnt += 1
           next = targets[next]
 
@@ -73,6 +74,7 @@ def game1(members, start_index):
       next = targets[start_index]
       cnt = 1
       while cnt < number:
+          print(f"{cnt}: {members[next].name}")
           cnt += 1
           next = targets[next]
 
