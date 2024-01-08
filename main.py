@@ -17,7 +17,7 @@ ______         _    _                     _____
          __/ |                                                          
         |___/                                                           
 '''
-Game_Life_Select_Menu = ""
+Game_Select_Menu = ""
 
 #게임 시작
 def Game_start():
@@ -78,9 +78,14 @@ def Game_setting_players(player_user):
 def Game_SoulGame(players_list):
     start_idx = random.randint(0,len(players_list)-1)
     while(True):
-        game_number = int(input("게임 골라 :"))
-        
-        #미니 게임 진행!
+        #사람이면 
+        if start_idx == 0:
+            print(Game_Select_Menu)
+            game_number = int(input("게임 골라 :"))
+        #컴퓨터면
+        else:
+            game_number = random.randint(0,5) 
+        #미니 게임 진행!/
         try:
             if game_number == 1:
                 loser_idx = game1(players_list,start_idx)
