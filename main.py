@@ -26,7 +26,9 @@ Game_Select_Menu = """
 
 #게임 시작
 def Game_start():
+    #게임 인트로 출력
     print(Game_start_Intro_Str)
+    #시작 여부
     while(True):
         try:
             start_flag = input("게임을 진행할까요? (y/n) :")
@@ -37,13 +39,14 @@ def Game_start():
         else:
             if start_flag == 'y':
                 Game_input()
-            else:
+            # start_flag == 'n'인 경우
+            else: 
                 return
 
 def Game_input():
+    #사용자 정보 입력 받기
     while(True):
         try:
-            #사용자 인 풋 받기
             player_user_name = input("당신의 이름은? : ")
             #주량 선택하기
             player_user_life = int(input("당신의 주량은? : "))
