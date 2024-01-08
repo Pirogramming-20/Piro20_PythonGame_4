@@ -17,11 +17,17 @@ ______         _    _                     _____
          __/ |                                                          
         |___/                                                           
 '''
+
+
 Game_Select_Menu = """
+=====================================================================================================
             1. 더 게임 오브 데스
             2. 아파트
             3. 레코드 게임
             4. 좋아 게임
+            5. 공산단 게임
+=====================================================================================================
+
           """
 
 #게임 시작
@@ -47,9 +53,10 @@ def Game_input():
     #사용자 정보 입력 받기
     while(True):
         try:
-            player_user_name = input("당신의 이름은? : ")
+            #사용자 인 풋 받기
+            player_user_name = input("😊 당신의 이름은? : ")
             #주량 선택하기
-            player_user_life = int(input("당신의 주량은? : "))
+            player_user_life = int(input("🍺 당신의 주량은? : "))
             if player_user_life > 10 or player_user_life < 0:
                 raise Exception("주량은 0~10까지의 정수")
             player_user = Player(player_user_name,player_user_life)
@@ -67,9 +74,11 @@ def Game_setting_players(player_user):
     players_list.append(player_user)
     while(True):
         try:        
-            num_add_player= int(input("추가 참가자 수 : "))
+            num_add_player= int(input("😎 추가 참가자 수 : "))
             if num_add_player > 5 or num_add_player <= 0:
-                raise("추가 참가자 수는 0~5")
+                raise Exception("추가 참가자 수는 0~5")
+        except ValueError:
+            print("추가 참가자 수는 정수")
         except Exception as e:
             print(e)
         else:   
@@ -80,21 +89,24 @@ def Game_setting_players(player_user):
                 player_Life = random.randint(5, 10)#주량
                 players_list.append(Player(name_add,player_Life))
             for player in players_list:
-                print(f"이름 : {player.name} 주량 : {player.life}")
+                print(f"{player.name} 주량 : {player.life} 잔🍺")
             Game_SoulGame(players_list)
 
 def Game_SoulGame(players_list):
     start_idx = random.randint(0,len(players_list)-1)
     while(True):
+        # 컴퓨터가 진행할때 너무 빠르게 되는 거 방지
+        input("너 괜찮아❓ (다음 게임을 진행하려면 아무키나 눌러 주세요) : ")
         #사람이면 
         if start_idx == 0:
             print(Game_Select_Menu)
-            game_number = int(input("게임 골라 : "))
+            print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏")
+            game_number = int(input("무슨 게임 할까? (1~5선택): "))
         #컴퓨터면
         else:
-            print(Game_Select_Menu)
-            game_number = random.randint(0,5) 
-            print(f"게임 골라 : {game_number}")    #미니 게임 진행!/
+            game_number = random.randint(1,5)
+            print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏") 
+        #미니 게임 진행!
         try:
             if game_number == 1:
                 loser_idx = game1(players_list,start_idx)
@@ -107,15 +119,33 @@ def Game_SoulGame(players_list):
             elif game_number == 5:
                 loser_idx = game5(players_list,start_idx)
             else:
-                raise("1~5까지만 입력해주세요")
+                raise Exception("게임🎮은 다섯개~게임🎰은 다섯개🖐️🖐️~(1~5만 입력해주세요)")
         except Exception as e:
             print(e)
-
-        #진 사람 처리!
+        
+        #진 사람 처리! if문은 죽으면 실행
         if(players_list[loser_idx].drink_check_die()):
-            print(players_list[loser_idx].name, "사망")
+            print(players_list[loser_idx].name, "💀 DOWN 💀")
+            print(players_list[loser_idx].name, "💀 DOWN 💀")
+            print(players_list[loser_idx].name, "💀 DOWN 💀")
+            print('''   
+                  
+                                                                                                            
+                    __ _   __ _  _ __ ___    ___    ___  __   __  ___  _ __ 
+                    / _` | / _` || '_ ` _ \  / _ \  / _ \ \ \ / / / _ \| '__|
+                    | (_| || (_| || | | | | ||  __/ | (_) | \ V / |  __/| |   
+                    \__, | \__,_||_| |_| |_| \___|  \___/   \_/   \___||_|   
+                    __/ |                                                   
+                    |___/     
+                 
+                                               
+                ''')
             break
-
+        
+        for player in players_list:
+            print(f"{player.name} : 현재 치사량까지  {player.life}잔 남음 🍺")
+        print("=====================================================================================================")
+        
         start_idx = loser_idx 
 
 Game_start()

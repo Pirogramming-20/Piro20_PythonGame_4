@@ -14,15 +14,18 @@ def game1(members, start_index):
                      __/ |                                                                      
                     |___/                                                                       
   """)
-  print("신난다 아~싸! 재미난다! 더 게임 오브 데스!")
+  print("==========================신이 난다 재미난다! 더 게임 오브 데스💀!==========================")
   player_name = members[0].name
   target = ''
   names = []
   targets = []
 
+  print("참가자는 :")
   for player in members:
+      print(player.name,end="😃 ")
+      print()
       names.append(player.name)
-
+      
   if members[start_index].name == player_name:
       while True:
           target = input("누구를 가리킬까요? : ")
@@ -49,12 +52,13 @@ def game1(members, start_index):
 
       next = targets[start_index]
       cnt = 1
-      while cnt < number:
-          print(f"{cnt}: {members[next].name}")
+      print(f"{cnt}: {members[start_index].name} 👉👉👉 {members[next].name} 너!!!")
+      cnt += 1
+      while cnt <= number:
+          print(f"{cnt}: {members[next].name} 👉👉👉 {members[targets[next]].name} 너!!!")
           cnt += 1
           next = targets[next]
 
-      print(f"{cnt}: {members[next].name}")
       print(f"{members[next].name}(이)가 걸렸습니다!")
       return next
 
@@ -80,16 +84,17 @@ def game1(members, start_index):
               targets.append(target_index)
               break
 
-      number = randint(0, len(members) - 1)
+      number = randint(1, 20)
       print(f"{members[start_index].name}(이)가 고른 숫자는? : {number}")
 
       next = targets[start_index]
       cnt = 1
-      while cnt < number:
-          print(f"{cnt}: {members[next].name}")
+      print(f"{cnt}: {members[start_index].name} 👉👉👉 {members[next].name} 너!!!")
+      cnt += 1
+      while cnt <= number:
+          print(f"{cnt}: {members[next].name} 👉👉👉 {members[targets[next]].name} 너!!!")
           cnt += 1
           next = targets[next]
 
-      print(f"{cnt}: {members[next].name}")
       print(f"{members[next].name}(이)가 걸렸습니다!")
       return next

@@ -7,12 +7,13 @@ user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTM
 hdr = {'User-Agent': user_agent}
 
 Game_intro_str = (
-    "레코드 레코드 잉잉잉~💿💿💿💿💿💿💿💿💿💿💿 레코드 레코드 잉잉잉~💿💿💿💿💿💿💿💿💿\n"
+    "=========레코드 레코드 잉잉잉~💿💿💿💿💿💿💿💿💿💿💿 레코드 레코드 잉잉잉~💿💿💿💿💿💿💿💿💿=========\n"
     "\033[1;31m주의! 이 게임은 파이썬 requests, BeautifulSoup이 깔려있어야 진행이 가능합니다\033[0m"
 )
+
+#게임 시작 정보 설정
 def game3_setting():
     theme_game = "" 
-    #게임 시작 정보 설정
     while(1):
         try:
             mod = int(input("난이도를 고르세요 (1-쉬움,2-보통 ,3-어려움): "))
@@ -31,9 +32,10 @@ def game3_setting():
             if num_song_HTML:
                 num_songs = int(num_song_HTML.get_text())
                 print(num_songs,"개의 곡 정보 존재")
+                # 곡 정보가 없는 가수일떄
                 if(num_songs == 0):
                     raise Exception("그런 사람 몰라요~")    
-                flag_game = input("취소하려면 n 계속 진행하려면 n이외의 아무키나 눌러주세여")
+                flag_game = input("취소하려면 n 계속 진행하려면 n이외의 아무키나 눌러주세요")
                 if(flag_game == 'n'):
                     raise Exception("게임 재시작")
             # 노래 개수를 받지 못했을때
@@ -45,11 +47,11 @@ def game3_setting():
             print(e)
         else:
             return theme_game, num_songs, mod
-    
-def game3_get_songs(theme_game, num_songs):
-    #멜론에서 곡 가져오기 
+
+#멜론에서 곡 가져오기    
+def game3_get_songs(theme_game, num_songs): 
     list_urls = []
-    #request로 할랬는데 멜론이 자바스크립트로 페이지를 바꿔서 아무리 해도 안돼 => 페이지 바꿀 때 마다 추가적인 html 받음
+    #멜론이 자바스크립트로 페이지를 바꿈 => 페이지 바꿀 때 마다 추가적인 html 받음
     #페이지마다 일부 html fetch
     #50단위로 페이지 변화
     for i in range(1,num_songs,50):
@@ -69,6 +71,7 @@ def game3_get_songs(theme_game, num_songs):
             list_songs_ForGame.append(song)
     return list_songs_ForGame
     
+#곡 띄어쓰기 영어 이름등을 고려해 데이터에 추가 
 def game_setting_songs(list_songs_ForGame):
     extra_answer = []
     for song in list_songs_ForGame:
@@ -80,7 +83,7 @@ def game_setting_songs(list_songs_ForGame):
             if '(' in song:
                 extra_answer.append(song.split('(')[0].strip())
                 extra_answer.append(song_NoWhitespace.split('(')[0])
-                #영어 이름(맨뒤에 .이 아니면)
+                #영어 이름(맨뒤에 .이 아니면) - 맨뒤가 .이면 곡 추가 정보(피처링 등) 
                 if song.split('(')[1].strip(')')[-1] != '.':
                     extra_answer.append(song.split('(')[1].strip(')'))
                     extra_answer.append(song_NoWhitespace.split('(')[0].strip(')'))
@@ -91,8 +94,8 @@ def game_setting_songs(list_songs_ForGame):
     # print(list_songs_ForGame)
     return list_songs_ForGame
 
+# 게임 순서 정하기
 def game3_ordering_players(players_list, start_idx):
-    # 순서 정하기
     players_list_ordered = []
     #start_idx를 제외한 플레이어는 추가 후 리스트 셔플 
     for i in range(len(players_list)):
@@ -101,9 +104,10 @@ def game3_ordering_players(players_list, start_idx):
     random.shuffle(players_list_ordered)
     #start_idx인 플레이어 맨 앞에 삽입
     players_list_ordered.insert(0,players_list[start_idx])
-    print("순서는")
-    for player in players_list:
-        print(player.name)
+    print("순서는 이쪽으로~~ 이쪽으로~~ ")
+    for player in players_list_ordered:
+        print(player.name, end = "😃 ")
+    print()
     return players_list_ordered
     
     
@@ -127,7 +131,7 @@ def game3(players_list,start_idx):
             if player == players_list[0]:
                 answer = input("노래 제목 입력 : ")
             else:
-                p_computer = random.randint(0, mod * 5)
+                p_computer = random.randint(0, mod * 7)
                 if p_computer == 0:
                     print(f"{player.name}: 내 패배다.......")
                     return players_list.index(player)
@@ -137,5 +141,5 @@ def game3(players_list,start_idx):
                 print(f"{player.name}: {answer}정답!")
                 list_songs_ForGame.remove(answer)
             else:
-                print(f"{answer}는 {theme_game}의 곡이 아닙니다 당첨")
+                print(f"{answer}는 {theme_game}의 곡이 아니거나 이미 나왔습니다!!!!!!!!!")
                 return players_list.index(player)
