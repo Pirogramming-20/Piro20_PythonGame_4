@@ -48,8 +48,8 @@ def game4(players, start_index):
         else:
             rejection_count += 1
             if rejection_count == 3:
-                print(f" ヘ（゜◇、゜）ノ  {select_player.name} 한잔해~   ヘ（゜◇、゜）ノ")
-                loser_index = players.index(select_player)
+                print(f" ヘ（゜◇、゜）ノ  {current_player.name} 한잔해~   ヘ（゜◇、゜）ノ")
+                loser_index = players.index(current_player)
                 return loser_index
                 break
 
