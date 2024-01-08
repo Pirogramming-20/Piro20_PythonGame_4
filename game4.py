@@ -42,7 +42,7 @@ def game4(players, start_index):
         if select_player == name:
             while(True):
                 try: 
-                    reaction_input = int(input("1 : 나도 좋아❤️ 2 : 칵~퉤🤮 "))
+                    reaction_input = int(input("1 : 나도 좋아❤️  2 : 칵~퉤🤮 "))
                     if reaction_input != 1 and reaction_input != 2:
                         raise Exception("1과 2중에 선택해주세요")
                 except ValueError:

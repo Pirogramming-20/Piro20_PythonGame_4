@@ -7,7 +7,7 @@ class Player:
         self.life -= 1
         #출력
         print(f" ヘ（゜◇、゜）ノ  {self.name} 한잔해~   ヘ（゜◇、゜）ノ")
-        if self.life < 0:
+        if self.life <= 0:
             return True
         else:
             return False
