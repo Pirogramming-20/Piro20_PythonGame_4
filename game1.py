@@ -43,6 +43,7 @@ def game1(members, start_index):
           cnt += 1
           next = targets[next]
 
+      print(f"{cnt}: {members[next].name}")
       print(f"{members[next].name}(이)가 걸렸습니다!")
       return next
 
@@ -78,5 +79,6 @@ def game1(members, start_index):
           cnt += 1
           next = targets[next]
 
+      print(f"{cnt}: {members[next].name}")
       print(f"{members[next].name}(이)가 걸렸습니다!")
       return next
