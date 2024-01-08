@@ -42,6 +42,11 @@ def Game_SoulGame():
         name_add = player_name_list.pop()
         player_Life = random.randint(0, 10)#주량
         players_list.append(Player(name_add,player_Life))
+    
+    # #각 참가자 이름과 주량 출력
+    # for player in players_list:
+    #     print(f"이름: {player.name}, 주량: {player.Life}")
+
 
     start_idx = random.randint(0,len(players_list)-1)
 
