@@ -14,7 +14,7 @@ def game1(members, start_index):
                      __/ |                                                                      
                     |___/                                                                       
   """)
-  print("신난다 아~싸! 재미난다! 더 게임 오브 데스!")
+  print("==========================신난다 아~싸! 재미난다! 더 게임 오브 데스!==========================")
   player_name = members[0].name
   target = ''
   names = []
