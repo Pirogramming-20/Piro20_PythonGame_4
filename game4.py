@@ -1,6 +1,6 @@
 import random
-#  DOWN DOWN DOWN!! 𖦹ࡇ𖦹 𖦹ࡇ𖦹 𖦹ࡇ𖦹
 
+#내가 시작해야하는거 아닌가 ? 진 사람이 게임 고르는게 아니라 랜덤으로 뽑혀서 게임 고르는거 아닌가
 def game4(players, start_index, name):
     current_player = players[start_index]  # 시작 플레이어
     rejection_count = 0
@@ -15,7 +15,7 @@ def game4(players, start_index, name):
             try:
                 choice= int(input())
 
-                if choice in i:
+                if choice in range(1, len(players)):
                     select_player = players[choice]
                     print(f"{current_player.name} : {select_player.name} 좋아~")
 
