@@ -98,31 +98,36 @@ def Game_SoulGame(players_list):
     while(True):
         # 컴퓨터가 진행할때 너무 빠르게 되는 거 방지
         input("너 괜찮아❓ (다음 게임을 진행하려면 아무키나 눌러 주세요) : ")
-        try:
-            #사람이면 
-            if start_idx == 0:
-                print(Game_Select_Menu)
-                print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏")
-                game_number = int(input("무슨 게임 할까? (1~4선택): "))
-            #컴퓨터면
-            else:
-                game_number = random.randint(1,4)
-                print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏") 
-            #미니 게임 진행!
-            if game_number == 1:
-                loser_idx = game1(players_list,start_idx)
-            elif game_number == 2:
-                loser_idx = game2(players_list,start_idx)
-            elif game_number == 3:
-                loser_idx = game3(players_list,start_idx)
-            elif game_number == 4:
-                loser_idx = game4(players_list,start_idx)
-            else:
-                raise Exception("게임🎮은 네개~ 게임🎰은 네개🖐️🖐️~(1~4만 입력해주세요)")
-        except ValueError:
-            print("정수를 입력해주세요")        
-        except Exception as e:
-            print(e)
+        while(True):
+            try:
+                #사람이면 
+                if start_idx == 0:
+                    print(Game_Select_Menu)
+                    print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏")
+                    game_number = int(input("무슨 게임 할까? (1~4선택): "))
+                #컴퓨터면
+                else:
+                    game_number = random.randint(1,4)
+                    print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏") 
+                #미니 게임 진행!
+                if game_number == 1:
+                    loser_idx = game1(players_list,start_idx)
+                    break
+                elif game_number == 2:
+                    loser_idx = game2(players_list,start_idx)
+                    break
+                elif game_number == 3:
+                    loser_idx = game3(players_list,start_idx)
+                    break
+                elif game_number == 4:
+                    loser_idx = game4(players_list,start_idx)
+                    break
+                else:
+                    raise Exception("게임🎮은 네개~ 게임🎰은 네개🖐️🖐️~(1~4만 입력해주세요)")
+            except ValueError:
+                print("정수를 입력해주세요")        
+            except Exception as e:
+                print(e)
 
         #진 사람 처리! if문은 죽으면 실행
         if(players_list[loser_idx].drink_check_die()):
