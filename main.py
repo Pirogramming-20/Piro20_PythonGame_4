@@ -45,6 +45,7 @@ def Game_start():
         else:
             if start_flag == 'y':
                 Game_input()
+                return
             # start_flag == 'n'인 경우
             else: 
                 return
@@ -57,15 +58,16 @@ def Game_input():
             player_user_name = input("😊 당신의 이름은? : ")
             #주량 선택하기
             player_user_life = int(input("🍺 당신의 주량은? : "))
-            if player_user_life > 10 or player_user_life < 0:
-                raise Exception("주량은 0~10까지의 정수")
+            if player_user_life > 10 or player_user_life < 1:
+                raise Exception("주량은 1~10까지의 정수")
             player_user = Player(player_user_name,player_user_life)
         except ValueError:
-            print("주량은 0~10까지의 정수")
+            print("주량은 1~10까지의 정수")
         except Exception as e:
             print(e)
         else:
             Game_setting_players(player_user)
+            return
 
 player_name_list = ["은서","하연", "연서", "예진", "헌도"]
 
@@ -91,23 +93,24 @@ def Game_setting_players(player_user):
             for player in players_list:
                 print(f"{player.name} 주량 : {player.life} 잔🍺")
             Game_SoulGame(players_list)
-
+            return
+        
 def Game_SoulGame(players_list):
     start_idx = random.randint(0,len(players_list)-1)
     while(True):
         # 컴퓨터가 진행할때 너무 빠르게 되는 거 방지
         input("너 괜찮아❓ (다음 게임을 진행하려면 아무키나 눌러 주세요) : ")
-        #사람이면 
-        if start_idx == 0:
-            print(Game_Select_Menu)
-            print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏")
-            game_number = int(input("무슨 게임 할까? (1~5선택): "))
-        #컴퓨터면
-        else:
-            game_number = random.randint(1,5)
-            print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏") 
-        #미니 게임 진행!
         try:
+            #사람이면 
+            if start_idx == 0:
+                print(Game_Select_Menu)
+                print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏")
+                game_number = int(input("무슨 게임 할까? (1~5선택): "))
+            #컴퓨터면
+            else:
+                game_number = random.randint(1,5)
+                print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏") 
+            #미니 게임 진행!
             if game_number == 1:
                 loser_idx = game1(players_list,start_idx)
             elif game_number == 2:
@@ -120,9 +123,11 @@ def Game_SoulGame(players_list):
                 loser_idx = game5(players_list,start_idx)
             else:
                 raise Exception("게임🎮은 다섯개~게임🎰은 다섯개🖐️🖐️~(1~5만 입력해주세요)")
+        except ValueError:
+            print("정수를 입력해주세요")        
         except Exception as e:
             print(e)
-        
+
         #진 사람 처리! if문은 죽으면 실행
         if(players_list[loser_idx].drink_check_die()):
             print(players_list[loser_idx].name, "💀 DOWN 💀")
@@ -140,7 +145,7 @@ def Game_SoulGame(players_list):
                  
                                                
                 ''')
-            break
+            return
         
         for player in players_list:
             print(f"{player.name} : 현재 치사량까지  {player.life}잔 남음 🍺")

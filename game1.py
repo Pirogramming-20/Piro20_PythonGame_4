@@ -23,9 +23,8 @@ def game1(members, start_index):
   print("참가자는 :")
   for player in members:
       print(player.name,end="😃 ")
-      print()
       names.append(player.name)
-      
+  print()
   if members[start_index].name == player_name:
       while True:
           target = input("누구를 가리킬까요? : ")
