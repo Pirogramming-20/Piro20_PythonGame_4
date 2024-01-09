@@ -5,7 +5,6 @@ from game1 import game1
 from game2 import game2
 from game3 import game3
 from game4 import game4
-from game5 import game5
 
 Game_start_Intro_Str = '''
 ______         _    _                     _____                         
@@ -25,7 +24,6 @@ Game_Select_Menu = """
             2. 아파트
             3. 레코드 게임
             4. 좋아 게임
-            5. 공산단 게임
 =====================================================================================================
 
           """
@@ -88,7 +86,7 @@ def Game_setting_players(player_user):
             random.shuffle(player_name_list)
             for i in range(num_add_player):
                 name_add = player_name_list.pop()
-                player_Life = random.randint(5, 10)#주량
+                player_Life = random.randint(4, 10)#주량
                 players_list.append(Player(name_add,player_Life))
             for player in players_list:
                 print(f"{player.name} 주량 : {player.life} 잔🍺")
@@ -105,10 +103,10 @@ def Game_SoulGame(players_list):
             if start_idx == 0:
                 print(Game_Select_Menu)
                 print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏")
-                game_number = int(input("무슨 게임 할까? (1~5선택): "))
+                game_number = int(input("무슨 게임 할까? (1~4선택): "))
             #컴퓨터면
             else:
-                game_number = random.randint(1,5)
+                game_number = random.randint(1,4)
                 print(f"{players_list[start_idx].name}가 좋아하는 랜덤게임🎰 무슨 게임🎮 게임 스타트👏") 
             #미니 게임 진행!
             if game_number == 1:
@@ -119,10 +117,8 @@ def Game_SoulGame(players_list):
                 loser_idx = game3(players_list,start_idx)
             elif game_number == 4:
                 loser_idx = game4(players_list,start_idx)
-            elif game_number == 5:
-                loser_idx = game5(players_list,start_idx)
             else:
-                raise Exception("게임🎮은 다섯개~게임🎰은 다섯개🖐️🖐️~(1~5만 입력해주세요)")
+                raise Exception("게임🎮은 네개~ 게임🎰은 네개🖐️🖐️~(1~4만 입력해주세요)")
         except ValueError:
             print("정수를 입력해주세요")        
         except Exception as e:
